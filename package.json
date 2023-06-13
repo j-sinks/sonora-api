@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node --watch index.js",
+    "db:make": "knex migrate:make",
     "db:migrate": "knex migrate:latest",
     "db:rollback": "knex migrate:rollback",
     "db:seed": "knex seed:run"

@@ -8,9 +8,9 @@ const soundRouter = require("./routes/sound-routes.js");
 app.use(cors());
 app.use(express.json());
 app.use("/audio", express.static("public/audio"));
-app.use("/api/sounds", soundRouter);
+// app.use("/api/sounds", soundRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server has started on port${PORT}`);
+  console.log(`Server has started on port ${PORT}`);
 });
 
