@@ -2,7 +2,8 @@
 node_modules
 
 # audio
-/audio
+audio
+.wav
 
 # misc
 .DS_Store
