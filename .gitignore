@@ -1,6 +1,9 @@
 # dependencies
 node_modules
 
+# audio
+/audio
+
 # misc
 .DS_Store
 .env

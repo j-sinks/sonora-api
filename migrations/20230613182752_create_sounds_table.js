@@ -9,12 +9,15 @@ exports.up = function(knex) {
       table.string("name").notNullable();
       table.string("type").notNullable();
       table.string("genre").notNullable().defaultTo("none");
+      table.string("subgenre").notNullable().defaultTo("none");
       table.string("key_scale").nullable();
+      table.string("rel_key_scale").nullable();
       table.integer("bpm").notNullable();
       table.integer("length").notNullable();
       table.string("url").notNullable();
     })
 };
+
 
 /**
  * @param { import("knex").Knex } knex
