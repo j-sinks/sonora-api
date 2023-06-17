@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/audio", express.static("public/audio"));
 
-// app.use("/api/profile", profileRouter);
+app.use("/api/profile", profileRouter);
 app.use("/api/sounds", soundRouter);
 
 app.listen(PORT, () => {
