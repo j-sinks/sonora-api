@@ -19,7 +19,7 @@ const allUsers = async (req, res) => {
 // POST a user
 const addUser = async (req, res) => {
   try {
-    const newUser = await knex("users").insert(req.body)
+    const newUser = await knex("users").insert(req.body);
 
     const user = await knex("users")
       .select(
@@ -107,7 +107,7 @@ const allSets = async (req, res) => {
 // POST a new set
 const addSet = async (req, res) => {
   try {
-    const newSet = await knex("sets").insert(req.body)
+    const newSet = await knex("sets").insert(req.body);
 
     const set = await knex("sets")
       .select(
@@ -172,6 +172,73 @@ const deleteSet = async (req, res) => {
   }
 };
 
+// GET all user's liked sounds
+const allSounds = async (req, res) => {
+  try {
+    const sounds = await knex("likes")
+      .join("users", "likes.user_id", "users.id")
+      .select(
+        "likes.id",
+        "likes.sound_id"
+      )
+      .where({
+        "users.id": req.params.userId
+      });
+    res.status(200).json(sounds);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error retriving liked sounds for user ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
+// POST a new liked sound
+const addSound = async (req, res) => {
+  try {
+    const newSound = await knex("likes")
+      .insert({
+        user_id: req.params.userId,
+        sound_id: req.body.sound_id
+      });
+
+    const sound = await knex("likes")
+      .select(
+        "id",
+        "sound_id"
+      )
+      .where({
+        id: newSound[0]
+      });
+    res.status(201).json(sound);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error liking sound ${req.body.sound_id}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
+// DELETE a liked sound
+const deleteSound = async (req, res) => {
+  try {
+    await knex("likes")
+      .where({
+        id: req.params.soundId
+      })
+      .del();
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error unliking sound ${req.params.soundId} for user ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
 module.exports = {
   allUsers,
   addUser,
@@ -181,4 +248,7 @@ module.exports = {
   addSet,
   singleSet,
   deleteSet,
+  allSounds,
+  addSound,
+  deleteSound,
 };

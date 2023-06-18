@@ -5,6 +5,8 @@ const {
   validateNewUser,
   validateNewSet,
   validateSet,
+  validateNewLike,
+  validateSound,
 } = require("../middleware/validation");
 
 // All users
@@ -32,14 +34,14 @@ router
   .delete(validateUser, validateSet, profileController.deleteSet);
 
 // A user's saved sounds
-// router
-//   .route("/:userId/sounds")
-//   .get(profileController.allSounds)
-//   .post(profileController.addSound)
+router
+  .route("/:userId/sounds")
+  .get(validateUser, profileController.allSounds)
+  .post(validateUser, validateNewLike, profileController.addSound)
 
 // A user's saved sound
-// router
-//   .route("/:userId/sounds/:soundId")
-//   .delete(profileController.removeSound)
+router
+  .route("/:userId/sounds/:soundId")
+  .delete(validateUser, validateSound, profileController.deleteSound)
 
 module.exports = router;
