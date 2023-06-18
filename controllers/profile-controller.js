@@ -177,10 +177,8 @@ const allSounds = async (req, res) => {
   try {
     const sounds = await knex("likes")
       .join("users", "likes.user_id", "users.id")
-      .select(
-        "likes.id",
-        "likes.sound_id"
-      )
+      .join("sounds", "likes.sound_id", "sounds.id")
+      .select("sounds.*")
       .where({
         "users.id": req.params.userId
       });
@@ -206,6 +204,7 @@ const addSound = async (req, res) => {
     const sound = await knex("likes")
       .select(
         "id",
+        "user_id",
         "sound_id"
       )
       .where({
@@ -226,7 +225,7 @@ const deleteSound = async (req, res) => {
   try {
     await knex("likes")
       .where({
-        id: req.params.soundId
+        sound_id: req.params.soundId
       })
       .del();
     res.status(204).send();

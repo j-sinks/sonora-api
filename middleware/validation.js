@@ -55,7 +55,9 @@ const validateNewSet = (req, res, next) => {
 const validateSet = async (req, res, next) => {
 
   try {
-    const set = await knex("sets").where({ id: req.params.setId }).first();
+    const set = await knex("sets")
+      .where({ id: req.params.setId })
+      .first();
 
     if (!set) {
       return res.status(404).json({
@@ -92,12 +94,14 @@ const validateNewLike = (req, res, next) => {
 const validateSound = async (req, res, next) => {
 
   try {
-    const sound = await knex("likes").where({ id: req.params.soundId }).first();
+    const sound = await knex("likes")
+      .where({ sound_id: req.params.soundId })
+      .first();
 
     if (!sound) {
       return res.status(404).json({
         error: true,
-        message: `Like ${req.params.soundId} does not exist. Please provide a valid like ID`,
+        message: `Sound ${req.params.soundId} is not currently liked. Please provide a valid sound ID`,
       });
     }
 
@@ -105,7 +109,7 @@ const validateSound = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       error: true,
-      message: `An error occurred while validating set`,
+      message: `An error occurred while validating liked sound`,
       detail: `${error.message}`,
     });
   }
