@@ -129,6 +129,49 @@ const addSet = async (req, res) => {
   }
 };
 
+// GET a user's set
+const singleSet = async (req, res) => {
+  try {
+    const set = await knex("sets")
+      .join("users", "sets.user_id", "users.id")
+      .select(
+        "sets.id",
+        "sets.name",
+        "sets.genre",
+        "sets.updated_at"
+      )
+      .where({
+        "users.id": req.params.userId,
+        "sets.id": req.params.setId
+      });
+    res.status(200).json(set);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error retriving set ${req.params.setId} for user ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
+// DELETE a set
+const deleteSet = async (req, res) => {
+  try {
+    await knex("sets")
+      .where({
+        id: req.params.setId
+      })
+      .del();
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error deleted set ${req.params.setId} for user ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
 module.exports = {
   allUsers,
   addUser,
@@ -136,4 +179,6 @@ module.exports = {
   deleteUser,
   allSets,
   addSet,
+  singleSet,
+  deleteSet,
 };

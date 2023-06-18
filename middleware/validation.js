@@ -51,8 +51,32 @@ const validateNewSet = (req, res, next) => {
   next();
 };
 
+// Check if requested set exists
+const validateSet = async (req, res, next) => {
+
+  try {
+    const set = await knex("sets").where({ id: req.params.setId }).first();
+
+    if (!set) {
+      return res.status(404).json({
+        error: true,
+        message: `Set ${req.params.setId} does not exist. Please provide a valid set ID`,
+      });
+    }
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `An error occurred while validating set`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
 module.exports = {
   validateUser,
   validateNewUser,
   validateNewSet,
+  validateSet,
 };
