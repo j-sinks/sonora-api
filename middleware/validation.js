@@ -2,9 +2,10 @@ const knex = require("knex")(require("../knexfile"));
 
 // Check if requested user exists
 const validateUser = async (req, res, next) => {
-
   try {
-    const user = await knex("users").where({ id: req.params.userId }).first();
+    const user = await knex("users")
+      .where({ id: req.params.userId })
+      .first();
 
     if (!user) {
       return res.status(404).json({
@@ -30,7 +31,8 @@ const validateNewUser = (req, res, next) => {
   if (!username || !email || !password) {
     return res.status(400).json({
       error: true,
-      message: "The following fields must be provided: username, email, and password",
+      message:
+        "The following fields must be provided: username, email, and password",
     });
   }
 
@@ -44,7 +46,8 @@ const validateNewSet = (req, res, next) => {
   if (!user_id || !name || !genre) {
     return res.status(400).json({
       error: true,
-      message: "The following fields must be provided: user ID, name, and genre",
+      message:
+        "The following fields must be provided: user ID, name, and genre",
     });
   }
 
@@ -53,10 +56,12 @@ const validateNewSet = (req, res, next) => {
 
 // Check if requested set exists
 const validateSet = async (req, res, next) => {
-
   try {
-    const set = await knex("sets")
-      .where({ id: req.params.setId })
+    const set = await knex("set_sound")
+      .where({
+        user_id: req.params.userId,
+        set_id: req.params.setId,
+      })
       .first();
 
     if (!set) {
@@ -92,10 +97,12 @@ const validateNewLike = (req, res, next) => {
 
 // Check if requested set exists
 const validateSound = async (req, res, next) => {
-
   try {
     const sound = await knex("likes")
-      .where({ sound_id: req.params.soundId })
+      .where({
+        user_id: req.params.userId,
+        sound_id: req.params.soundId,
+      })
       .first();
 
     if (!sound) {

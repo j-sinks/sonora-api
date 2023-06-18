@@ -40,6 +40,12 @@ exports.up = function (knex) {
     .createTable("set_sound", (table) => {
       table.increments("id").primary();
       table
+        .integer("user_id")
+        .unsigned()
+        .references("users.id")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+      table
         .integer("set_id")
         .unsigned()
         .references("sets.id")

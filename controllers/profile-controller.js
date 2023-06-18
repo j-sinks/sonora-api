@@ -1,11 +1,9 @@
 const knex = require("knex")(require("../knexfile"));
-// const validation = require("../middleware/validation");
 
 // GET all users
 const allUsers = async (req, res) => {
   try {
-    const users = await knex("users")
-      .select();
+    const users = await knex("users").select();
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({
@@ -22,13 +20,9 @@ const addUser = async (req, res) => {
     const newUser = await knex("users").insert(req.body);
 
     const user = await knex("users")
-      .select(
-        "id",
-        "username",
-        "email"
-      )
-      .where({
-        id: newUser[0]
+      .select("id", "username", "email")
+      .where({ 
+        id: newUser[0],
       });
     res.status(201).json(user);
   } catch (error) {
@@ -44,13 +38,9 @@ const addUser = async (req, res) => {
 const singleUser = async (req, res) => {
   try {
     const user = await knex("users")
-      .select(
-        "id",
-        "username",
-        "email"
-      )
-      .where({
-        id: req.params.userId,
+      .select("id", "username", "email")
+      .where({ 
+        id: req.params.userId, 
       });
     res.status(200).json(user[0]);
   } catch (error) {
@@ -85,14 +75,9 @@ const allSets = async (req, res) => {
   try {
     const sets = await knex("sets")
       .join("users", "sets.user_id", "users.id")
-      .select(
-        "sets.id",
-        "sets.name",
-        "sets.genre",
-        "sets.updated_at"
-      )
+      .select("sets.id", "sets.name", "sets.genre", "sets.updated_at")
       .where({
-        "users.id": req.params.userId
+        "users.id": req.params.userId,
       });
     res.status(200).json(sets);
   } catch (error) {
@@ -104,20 +89,15 @@ const allSets = async (req, res) => {
   }
 };
 
-// POST a new set
+// POST a new set (FIGURE OUT WAY TO ADD SET/SOUND IDS TO JUNCTION TABLE)
 const addSet = async (req, res) => {
   try {
     const newSet = await knex("sets").insert(req.body);
 
     const set = await knex("sets")
-      .select(
-        "id",
-        "name",
-        "genre",
-        "created_at"
-      )
+      .select("id", "name", "genre", "created_at")
       .where({
-        id: newSet[0]
+        id: newSet[0],
       });
     res.status(201).json(set);
   } catch (error) {
@@ -132,17 +112,14 @@ const addSet = async (req, res) => {
 // GET a user's set
 const singleSet = async (req, res) => {
   try {
-    const set = await knex("sets")
-      .join("users", "sets.user_id", "users.id")
-      .select(
-        "sets.id",
-        "sets.name",
-        "sets.genre",
-        "sets.updated_at"
-      )
+    const set = await knex("set_sound")
+      .join("users", "set_sound.user_id", "users.id")
+      .join("sets", "set_sound.set_id", "sets.id")
+      .join("sounds", "set_sound.sound_id", "sounds.id")
+      .select("sounds.*")
       .where({
         "users.id": req.params.userId,
-        "sets.id": req.params.setId
+        "sets.id": req.params.setId,
       });
     res.status(200).json(set);
   } catch (error) {
@@ -159,7 +136,7 @@ const deleteSet = async (req, res) => {
   try {
     await knex("sets")
       .where({
-        id: req.params.setId
+        id: req.params.setId,
       })
       .del();
     res.status(204).send();
@@ -180,7 +157,7 @@ const allSounds = async (req, res) => {
       .join("sounds", "likes.sound_id", "sounds.id")
       .select("sounds.*")
       .where({
-        "users.id": req.params.userId
+        "users.id": req.params.userId,
       });
     res.status(200).json(sounds);
   } catch (error) {
@@ -198,17 +175,13 @@ const addSound = async (req, res) => {
     const newSound = await knex("likes")
       .insert({
         user_id: req.params.userId,
-        sound_id: req.body.sound_id
+        sound_id: req.body.sound_id,
       });
 
     const sound = await knex("likes")
-      .select(
-        "id",
-        "user_id",
-        "sound_id"
-      )
+      .select("id", "user_id", "sound_id")
       .where({
-        id: newSound[0]
+        id: newSound[0],
       });
     res.status(201).json(sound);
   } catch (error) {
@@ -225,7 +198,7 @@ const deleteSound = async (req, res) => {
   try {
     await knex("likes")
       .where({
-        sound_id: req.params.soundId
+        sound_id: req.params.soundId,
       })
       .del();
     res.status(204).send();

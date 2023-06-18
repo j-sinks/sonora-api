@@ -37,11 +37,11 @@ router
 router
   .route("/:userId/sounds")
   .get(validateUser, profileController.allSounds)
-  .post(validateUser, validateNewLike, profileController.addSound)
+  .post(validateUser, validateNewLike, profileController.addSound);
 
 // A user's saved sound
 router
   .route("/:userId/sounds/:soundId")
-  .delete(validateUser, validateSound, profileController.deleteSound)
+  .delete(validateUser, validateSound, profileController.deleteSound);
 
 module.exports = router;
