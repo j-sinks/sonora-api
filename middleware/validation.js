@@ -37,7 +37,22 @@ const validateNewUser = (req, res, next) => {
   next();
 };
 
+// Check if correct fields have been submitted to add new user
+const validateNewSet = (req, res, next) => {
+  const { user_id, name, genre } = req.body;
+
+  if (!user_id || !name || !genre) {
+    return res.status(400).json({
+      error: true,
+      message: "The following fields must be provided: user ID, name, and genre",
+    });
+  }
+
+  next();
+};
+
 module.exports = {
   validateUser,
   validateNewUser,
+  validateNewSet,
 };

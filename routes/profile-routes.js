@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const profileController = require("../controllers/profile-controller");
-const { validateUser, validateNewUser } = require("../middleware/validation");
+const { validateUser, validateNewUser, validateNewSet } = require("../middleware/validation");
 
 // All users
 router
@@ -15,10 +15,10 @@ router
   .delete(validateUser, profileController.deleteUser)
 
 // A user's saved sets
-// router
-//   .route("/:userId/sets")
-//   .get(profileController.allSets)
-//   .post(profileController.addSet)
+router
+  .route("/:userId/sets")
+  .get(validateUser, profileController.allSets)
+  .post(validateUser, validateNewSet, profileController.addSet)
 
 // A user's saved set
 // router

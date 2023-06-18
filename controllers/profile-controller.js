@@ -30,7 +30,6 @@ const addUser = async (req, res) => {
       .where({
         id: newUser[0]
       });
-
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({
@@ -57,7 +56,7 @@ const singleUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: true,
-      message: `Error retriving user ${req.params.id}`,
+      message: `Error retriving user ${req.params.userId}`,
       detail: `${error.message}`,
     });
   }
@@ -75,7 +74,56 @@ const deleteUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: true,
-      message: `Error deleted user ${req.params.id}`,
+      message: `Error deleted user ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
+// GET all user's sets
+const allSets = async (req, res) => {
+  try {
+    const sets = await knex("sets")
+      .join("users", "sets.user_id", "users.id")
+      .select(
+        "sets.id",
+        "sets.name",
+        "sets.genre",
+        "sets.updated_at"
+      )
+      .where({
+        "users.id": req.params.userId
+      });
+    res.status(200).json(sets);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error retriving sets for user ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
+// POST a new set
+const addSet = async (req, res) => {
+  try {
+    const newSet = await knex("sets").insert(req.body)
+
+    const set = await knex("sets")
+      .select(
+        "id",
+        "name",
+        "genre",
+        "created_at"
+      )
+      .where({
+        id: newSet[0]
+      });
+    res.status(201).json(set);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error adding set ${req.body.name}`,
       detail: `${error.message}`,
     });
   }
@@ -86,4 +134,6 @@ module.exports = {
   addUser,
   singleUser,
   deleteUser,
+  allSets,
+  addSet,
 };
