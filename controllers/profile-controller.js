@@ -1,3 +1,5 @@
+const { forEach } = require("../seed-data/sounds");
+
 const knex = require("knex")(require("../knexfile"));
 
 // GET all users
@@ -91,15 +93,15 @@ const allSets = async (req, res) => {
 
 // POST a new set (FIGURE OUT WAY TO ADD SET/SOUND IDS TO JUNCTION TABLE)
 const addSet = async (req, res) => {
-  try {
-    const newSet = await knex("sets").insert(req.body);
+  const { user_id, name, genre, sounds } = req.body;
 
-    const set = await knex("sets")
-      .select("id", "name", "genre", "created_at")
-      .where({
-        id: newSet[0],
-      });
-    res.status(201).json(set);
+  try {
+    const [newSet] = await knex("sets").insert({ user_id, name, genre });
+
+    for (const sound of sounds) {
+      await knex("set_sound").insert({user_id: user_id, set_id: newSet, sound_id: sound })
+    }
+    res.status(201).json({ message: `Set ${req.body.name} was saved` });
   } catch (error) {
     res.status(500).json({
       error: true,
