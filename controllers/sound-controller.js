@@ -14,7 +14,6 @@ const isObjectTwo = (obj) => {
 // If not, the query parameters are applied
 const allSounds = async (req, res) => {
   if (isObjectEmpty(req.query)) {
-
     try {
       const sounds = await knex("sounds").select();
       res.status(200).json(sounds);
@@ -25,9 +24,7 @@ const allSounds = async (req, res) => {
         detail: `${error.message}`,
       });
     }
-
   } else if (isObjectTwo(req.query)) {
-
     const { type, subgenre } = req.query;
 
     try {
@@ -43,9 +40,7 @@ const allSounds = async (req, res) => {
         detail: `${error.message}`,
       });
     }
-
   } else {
-
     const { type, subgenre, key_scale, rel_key_scale } = req.query;
 
     try {
@@ -63,10 +58,26 @@ const allSounds = async (req, res) => {
         detail: `${error.message}`,
       });
     }
+  }
+};
 
+// GET a sound
+const singleSound = async (req, res) => {
+  try {
+    const sound = await knex("sounds").select().where({
+      id: req.params.soundId,
+    });
+    res.status(200).json(sound[0]);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error retriving sound ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
   }
 };
 
 module.exports = {
   allSounds,
+  singleSound,
 };
