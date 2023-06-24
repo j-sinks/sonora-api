@@ -21,11 +21,9 @@ const addUser = async (req, res) => {
   try {
     const newUser = await knex("users").insert(req.body);
 
-    const user = await knex("users")
-      .select("id", "username", "email")
-      .where({ 
-        id: newUser[0],
-      });
+    const user = await knex("users").select("id", "username", "email").where({
+      id: newUser[0],
+    });
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({
@@ -39,11 +37,9 @@ const addUser = async (req, res) => {
 // GET a user
 const singleUser = async (req, res) => {
   try {
-    const user = await knex("users")
-      .select("id", "username", "email")
-      .where({ 
-        id: req.params.userId, 
-      });
+    const user = await knex("users").select("id", "username", "email").where({
+      id: req.params.userId,
+    });
     res.status(200).json(user[0]);
   } catch (error) {
     res.status(500).json({
@@ -91,7 +87,7 @@ const allSets = async (req, res) => {
   }
 };
 
-// POST a new set (FIGURE OUT WAY TO ADD SET/SOUND IDS TO JUNCTION TABLE)
+// POST a new set
 const addSet = async (req, res) => {
   const { user_id, name, genre, sounds } = req.body;
 
@@ -99,7 +95,11 @@ const addSet = async (req, res) => {
     const [newSet] = await knex("sets").insert({ user_id, name, genre });
 
     for (const sound of sounds) {
-      await knex("set_sound").insert({user_id: user_id, set_id: newSet, sound_id: sound })
+      await knex("set_sound").insert({
+        user_id: user_id,
+        set_id: newSet,
+        sound_id: sound,
+      });
     }
     res.status(201).json({ message: `Set ${req.body.name} was saved` });
   } catch (error) {
@@ -151,6 +151,28 @@ const deleteSet = async (req, res) => {
   }
 };
 
+// PATCH a set
+const updateSet = async (req, res) => {
+  try {
+    await knex("sets")
+      .where({
+        id: req.params.setId,
+      })
+      .update(req.body);
+
+    const set = await knex("sets").where({
+      id: req.params.setId,
+    });
+    res.status(200).json(set);
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: `Error updating set ${req.params.setId} for user ${req.params.userId}`,
+      detail: `${error.message}`,
+    });
+  }
+};
+
 // GET all user's liked sounds
 const allSounds = async (req, res) => {
   try {
@@ -174,11 +196,10 @@ const allSounds = async (req, res) => {
 // POST a new liked sound
 const addSound = async (req, res) => {
   try {
-    const newSound = await knex("likes")
-      .insert({
-        user_id: req.params.userId,
-        sound_id: req.body.sound_id,
-      });
+    const newSound = await knex("likes").insert({
+      user_id: req.params.userId,
+      sound_id: req.body.sound_id,
+    });
 
     const sound = await knex("likes")
       .select("id", "user_id", "sound_id")
@@ -222,6 +243,7 @@ module.exports = {
   addSet,
   singleSet,
   deleteSet,
+  updateSet,
   allSounds,
   addSound,
   deleteSound,

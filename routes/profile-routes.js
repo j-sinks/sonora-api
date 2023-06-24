@@ -31,7 +31,8 @@ router
 router
   .route("/:userId/sets/:setId")
   .get(validateUser, validateSet, profileController.singleSet)
-  .delete(validateUser, validateSet, profileController.deleteSet);
+  .delete(validateUser, validateSet, profileController.deleteSet)
+  .patch(validateUser, validateSet, profileController.updateSet);
 
 // A user's saved sounds
 router
