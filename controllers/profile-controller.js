@@ -160,9 +160,11 @@ const updateSet = async (req, res) => {
       })
       .update(req.body);
 
-    const set = await knex("sets").where({
-      id: req.params.setId,
-    });
+    const set = await knex("sets")
+      .select("id", "user_id", "name", "genre")
+      .where({
+        id: req.params.setId,
+      });
     res.status(200).json(set);
   } catch (error) {
     res.status(500).json({
