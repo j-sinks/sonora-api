@@ -1,9 +1,7 @@
 # dependencies
 node_modules
 
-# audio
-audio
-.wav
+# audio has been removed from gitignore for submission
 
 # misc
 .DS_Store
