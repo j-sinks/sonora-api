@@ -682,15 +682,15 @@ module.exports = [
     url: "http://localhost:8080/audio/US_DJH_Key_118_bounds_Gm.wav",
   },
   {
-    name: "US_DJH_Key_118_cuz_Bm",
+    name: "US_DJH_Key_118_dont_D%23",
     type: "harmony",
     genre: "house",
     subgenre: "jazz_house",
-    key_scale: "Bm",
-    rel_key_scale: "D",
+    key_scale: "D%23m",
+    rel_key_scale: "Cm",
     bpm: 118,
     length: 8,
-    url: "http://localhost:8080/audio/US_DJH_Key_118_cuz_Bm.wav",
+    url: "http://localhost:8080/audio/US_DJH_Key_118_dont_D%23.wav",
   },
   {
     name: "US_DJH_Key_118_cuz_Abm",
@@ -2717,7 +2717,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_LFDH_Synth_119_castleclub1_G.wav",
   },
   {
-    name: "US_LFDH_Synth_119_castleclub2_C#",
+    name: "US_LFDH_Synth_119_castleclub2_C%23",
     type: "harmony",
     genre: "house",
     subgenre: "Lo-Fi_House",
@@ -2725,7 +2725,7 @@ module.exports = [
     rel_key_scale: "A%23m",
     bpm: 119,
     length: 8,
-    url: "http://localhost:8080/audio/US_LFDH_Synth_119_castleclub2_C#.wav",
+    url: "http://localhost:8080/audio/US_LFDH_Synth_119_castleclub2_C%23.wav",
   },
   {
     name: "US_LFDH_Synth_119_cellar_E",
@@ -3718,7 +3718,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Bass_140_BlowOut_Ebm7.wav",
   },
   {
-    name: "US_CT_Bass_140_Bumper_F#7",
+    name: "US_CT_Bass_140_Bumper_F%237",
     type: "bass",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -3726,7 +3726,7 @@ module.exports = [
     rel_key_scale: "D%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Bass_140_Bumper_F#7.wav",
+    url: "http://localhost:8080/audio/US_CT_Bass_140_Bumper_F%237.wav",
   },
   {
     name: "US_CT_Bass_140_Deepism_Ebm",
@@ -3740,7 +3740,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Bass_140_Deepism_Ebm.wav",
   },
   {
-    name: "US_CT_Bass_140_DeepThroat_F#",
+    name: "US_CT_Bass_140_DeepThroat_F%23",
     type: "bass",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -3748,7 +3748,7 @@ module.exports = [
     rel_key_scale: "D%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Bass_140_DeepThroat_F#.wav",
+    url: "http://localhost:8080/audio/US_CT_Bass_140_DeepThroat_F%23.wav",
   },
   {
     name: "US_CT_Bass_140_Funk_CF",
@@ -3828,7 +3828,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Bass_140_Riser_Cm.wav",
   },
   {
-    name: "US_CT_Bass_140_Rubber_F#7",
+    name: "US_CT_Bass_140_Rubber_F%237",
     type: "bass",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -3836,10 +3836,10 @@ module.exports = [
     rel_key_scale: "D%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Bass_140_Rubber_F#7.wav",
+    url: "http://localhost:8080/audio/US_CT_Bass_140_Rubber_F%237.wav",
   },
   {
-    name: "US_CT_Bass_140_SpaceAge_F#7",
+    name: "US_CT_Bass_140_SpaceAge_F%237",
     type: "bass",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -3847,7 +3847,7 @@ module.exports = [
     rel_key_scale: "D%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Bass_140_SpaceAge_F#7.wav",
+    url: "http://localhost:8080/audio/US_CT_Bass_140_SpaceAge_F%237.wav",
   },
   {
     name: "US_CT_Bass_140_Strident_Ebm",
@@ -3916,7 +3916,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Bass_140_Wavey_Ebm.wav",
   },
   {
-    name: "US_CT_Bass_140_Womp_BG#m",
+    name: "US_CT_Bass_140_Womp_BG%23m",
     type: "bass",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -3924,7 +3924,7 @@ module.exports = [
     rel_key_scale: "G%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Bass_140_Womp_BG#m.wav",
+    url: "http://localhost:8080/audio/US_CT_Bass_140_Womp_BG%23m.wav",
   },
   {
     name: "US_CT_Chord_140_Arpy_C",
@@ -4070,7 +4070,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Chord_140_Kaleidoscope_CF.wav",
   },
   {
-    name: "US_CT_Chord_140_KeepOn_F#j7",
+    name: "US_CT_Chord_140_KeepOn_F%23j7",
     type: "harmony",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -4078,7 +4078,7 @@ module.exports = [
     rel_key_scale: "D%23m",
     bpm: 140,
     length: 14,
-    url: "http://localhost:8080/audio/US_CT_Chord_140_KeepOn_F#j7.wav",
+    url: "http://localhost:8080/audio/US_CT_Chord_140_KeepOn_F%23j7.wav",
   },
   {
     name: "US_CT_Chord_140_Kola_Eb7",
@@ -4202,7 +4202,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Synth_140_DistroLead_C.wav",
   },
   {
-    name: "US_CT_Synth_140_Downtown_F#",
+    name: "US_CT_Synth_140_Downtown_F%23",
     type: "synth",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -4210,7 +4210,7 @@ module.exports = [
     rel_key_scale: "D%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Synth_140_Downtown_F#.wav",
+    url: "http://localhost:8080/audio/US_CT_Synth_140_Downtown_F%23.wav",
   },
   {
     name: "US_CT_Synth_140_Eclipse_C",
@@ -4257,7 +4257,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Synth_140_Haunted_Ebm7.wav",
   },
   {
-    name: "US_CT_Synth_140_Plucki_C#",
+    name: "US_CT_Synth_140_Plucki_C%23",
     type: "synth",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -4265,7 +4265,7 @@ module.exports = [
     rel_key_scale: "A%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Synth_140_Plucki_C#.wav",
+    url: "http://localhost:8080/audio/US_CT_Synth_140_Plucki_C%23.wav",
   },
   {
     name: "US_CT_Synth_140_Porto_Cm",
@@ -4312,7 +4312,7 @@ module.exports = [
     url: "http://localhost:8080/audio/US_CT_Synth_140_Sustain2_CmGm.wav",
   },
   {
-    name: "US_CT_Synth_140_TooHigh_D#",
+    name: "US_CT_Synth_140_TooHigh_D%23",
     type: "synth",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -4320,10 +4320,10 @@ module.exports = [
     rel_key_scale: "Cm",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Synth_140_TooHigh_D#.wav",
+    url: "http://localhost:8080/audio/US_CT_Synth_140_TooHigh_D%23.wav",
   },
   {
-    name: "US_CT_Synth_140_Tricky_F#7",
+    name: "US_CT_Synth_140_Tricky_F%237",
     type: "synth",
     genre: "electronica",
     subgenre: "chilltronica",
@@ -4331,7 +4331,7 @@ module.exports = [
     rel_key_scale: "D%23m",
     bpm: 140,
     length: 7,
-    url: "http://localhost:8080/audio/US_CT_Synth_140_Tricky_F#7.wav",
+    url: "http://localhost:8080/audio/US_CT_Synth_140_Tricky_F%237.wav",
   },
   {
     name: "US_CT_Synth_140_Zeus_DmDm7",
